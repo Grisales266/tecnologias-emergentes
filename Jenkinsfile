@@ -5,14 +5,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'python3 function.py'  // Cambia el comando según tus necesidades
+                sh 'python3 main.py'  // Cambia el comando según tus necesidades
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running Tests...'
-                sh 'pytest tests'  // Ejecuta las pruebas
+                sh 'pytest test.py'  // Ejecuta las pruebas
             }
         }
 
