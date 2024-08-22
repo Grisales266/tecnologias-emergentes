@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'python3 main.py'  // Cambia el comando según tus necesidades
+                sh 'python3 main.py' 
             }
         }
 
