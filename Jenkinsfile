@@ -12,7 +12,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running Tests...'
-                sh 'pytest test.py'  // Ejecuta las pruebas
+                sh 'pytest test.py'
             }
         }
 
@@ -27,7 +27,7 @@ pipeline {
                     sshpass -p ${password} scp -o StrictHostKeyChecking=no -r main.py test.py ${user}@${serverIP}:${remoteDir}
                     """
 
-                    // SSH into the remote server and run the application
+            
                     sh """
                     sshpass -p ${password} ssh ${user}@${serverIP} << EOF
                     cd ${remoteDir}
