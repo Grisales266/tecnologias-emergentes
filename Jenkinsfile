@@ -24,7 +24,7 @@ pipeline {
                     def user = "iot"
                     def password = "123"
                     sh """
-                    sshpass -p ${password} scp -r * ${user}@${serverIP}:${remoteDir}
+                    sshpass -p ${password} scp -r main.py test.py ${user}@${serverIP}:${remoteDir}
                     """
 
                     // SSH into the remote server and run the application
