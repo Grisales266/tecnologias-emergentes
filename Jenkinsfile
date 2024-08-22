@@ -16,10 +16,27 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy to Remote Server') {
             steps {
-                echo 'Deploying...'
-                // Aquí iría la lógica de despliegue, como copiar archivos o ejecutar scripts
+                script {
+                    def remoteDir = "/home/iot/Desktop/tecnologias-emergentes"
+                    def serverIP = "192.168.200.135"
+                    def user = "iot"
+                    def password = "123"
+                    sh """
+                    sshpass -p ${password} scp -r * ${user}@${serverIP}:${remoteDir}
+                    """
+
+                    // SSH into the remote server and run the application
+                    sh """
+                    sshpass -p ${password} ssh ${user}@${serverIP} << EOF
+                    cd ${remoteDir}
+                    pkill -f "uvicorn" || true
+                    nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
+                    exit
+                    EOF
+                    """
+                }
             }
         }
     }
