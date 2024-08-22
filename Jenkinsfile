@@ -32,7 +32,7 @@ pipeline {
                     sshpass -p ${password} ssh ${user}@${serverIP} << EOF
                     cd ${remoteDir}
                     pkill -f "uvicorn" || true
-                    nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
+                    nohup uvicorn main:app --host 0.0.0.0 --port 8000 > output.log 2>&1 &
                     exit
                     EOF
                     """
